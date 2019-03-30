@@ -1,20 +1,23 @@
 var axios = require("axios");
 var cheerio = require("cheerio");
-var db = require("./models");
+var db = require("../models");
 
 module.exports = function(app) {
-    app.get("/scrape", function(req, res) {
-    axios.get("http://www..com/").then(function(response) {
+
+
+    app.get("/", function(req, res) {
+    axios.get("https://www.nytimes.com/section/sports").then(function(response) {
         var $ = cheerio.load(response.data);
 
-        $("article h2").each(function(i, element) {
+        $(".css-4jyr1y").each(function(i, element) {
         var result = {};
-        result.title = $(this)
-            .children("a")
-            .text();
-        result.link = $(this)
-            .children("a")
-            .attr("href");
+        result.headline = $(this).find("h2").text();;
+        result.link = $(this).children("a").attr("href");
+        result.summary = $(this).find("p").text();
+        result.photo = $(this).find("img").attr("src");
+        result.author = $(this).find(".css-1n7hynb").text();
+
+        console.log(result);
 
         db.Article.create(result)
             .then(function(dbArticle) {
