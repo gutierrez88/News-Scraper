@@ -9,13 +9,13 @@ module.exports = function(app) {
     axios.get("https://www.nytimes.com/section/sports").then(function(response) {
         var $ = cheerio.load(response.data);
 
-        $(".css-4jyr1y").each(function(i, element) {
+        $(".css-1cp3ece").each(function(i, element) {
         var result = {};
-        result.headline = $(this).find("h2").text();;
-        result.link = $(this).children("a").attr("href");
-        result.summary = $(this).find("p").text();
-        result.photo = $(this).find("img").attr("src");
-        result.author = $(this).find(".css-1n7hynb").text();
+        result.username = $(this).find(".css-4jyr1y").find("h2").text();;
+        result.link = $(this).find(".css-4jyr1y").children("a").attr("href");
+        result.summary = $(this).find(".css-4jyr1y").find("p").text();
+        result.photo = $(this).find(".css-4jyr1y").find("img").attr("src");
+        result.author = $(this).find(".css-4jyr1y").find(".css-1n7hynb").text();
 
         console.log(result);
 

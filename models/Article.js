@@ -3,8 +3,11 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var ArticleSchema = new Schema({
-    headline: {
+    
+    username: {
         type: String,
+        unique: true,
+        trim: true,
         required: true
     },
     summary: {
@@ -13,11 +16,17 @@ var ArticleSchema = new Schema({
     }, 
     link: {
         type: String,
+        unique: true,
+        trim: true,
         required: true
     },
     note: {
         type: Schema.Types.ObjectId,
         ref: "Note"
+    },
+    dateAdded: {
+        type: Date,
+        default: Date.now()
     },
     photo: String,
     author: String
