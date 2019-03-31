@@ -32,7 +32,7 @@ module.exports = function(app) {
     });
 
     app.get("/articles", function(req, res) {
-    db.Article.find({}).then(function (data){
+    db.Article.find({}).sort({link: -1}).then(function (data){
         res.json(data);
     }).catch(function(error) {
         res.json(error);
@@ -40,25 +40,25 @@ module.exports = function(app) {
     });
 
     app.get("/articles/:id", function(req, res) {
-    db.Article.find({_id: req.params.id})
-    .populate("note")
-    .then(function(data) {
-        res.json(data);
-    }).catch(function(error) {
-        res.json(error);
-    });
+        db.Article.find({_id: req.params.id})
+        .populate("note")
+        .then(function(data) {
+            res.json(data);
+        }).catch(function(error) {
+            res.json(error);
+        });
     });
 
     app.post("/articles/:id", function(req, res) {
-    db.Note.create(req.body)
-    .then(function(newnote){
-        return db.Article.findOneAndUpdate({_id: req.params.id},{ $push: {note: newnote._id}}, {new: true});
-    })
-    .then(function(data) {
-        res.json(data);
-    }).catch(function(error) {
-        res.json(error);
-    });
+        db.Note.create(req.body)
+        .then(function(newNote){
+            return db.Article.findOneAndUpdate({_id: req.params.id},{ $push: {note: newNote._id}}, {new: true});
+        })
+        .then(function(data) {
+            res.json(data);
+        }).catch(function(error) {
+            res.json(error);
+        });
     });
 
 };
