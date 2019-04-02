@@ -4,7 +4,7 @@ $(document).ready(function(){
 
 var dataArray;
 
-$("#submit").on("click", function(){
+$(document).on("click", "#scrape", function(){
     $.ajax({
         url: "/scrape",
         type: "GET"
@@ -26,11 +26,11 @@ $(document).on("click", "#writeNote", function(){
     $("#modalUserName").text(sum); 
 
     $("#notesModal").modal('open')
-    console.log(dataArray);
 })
 
 $(document).on("click", "#addNote", function() {
-  
+    $("#notesModal").modal('close')
+    
     var thisId = $(this).attr("data-id");
     var title = $("#noteTitle").val();
     var body = $("#noteBody").val();
@@ -46,7 +46,27 @@ $(document).on("click", "#addNote", function() {
         console.log(data);
     });
 
-    $("#notesModal").modal('close')
     $("#noteTitle").val("");
     $("#noteBody").val("");
+  });
+
+  $(document).on("click", "#seeNote", function() {
+    var thisId = $(this).attr("data-id");
+
+    $.ajax({
+        method: "GET",
+        url: "/note/" + thisId
+    }).then(function(data){
+        console.log(data);
+        $("#modalNotes-content").empty();
+        // for (i = 0; i < data.notes.length; i++){
+            var notes = "<div id='singleNote' class='text-center'><h6>"+ data[0].notes.title +"</h6><h6>"+ data[0].notes.body +"</h6><button class='btn' id='deleteNote' data-id='"+ data[0]._id +"'>Delete</button><a href='#!' class='modal-close waves-effect waves-green btn-flat'>Close</a></div>"
+
+            $("#modalNotes-content").append(notes);
+        
+
+        $("#seeModal").modal('open')
+    });
+    
+    
   });
