@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 var ArticleSchema = new Schema({
     
-    username: {
+    userName: {
         type: String,
         unique: true,
         trim: true,
@@ -14,7 +14,7 @@ var ArticleSchema = new Schema({
         type: String,
         required: true
     }, 
-    link: {
+    url: {
         type: String,
         unique: true,
         trim: true,
