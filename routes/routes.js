@@ -31,12 +31,15 @@ module.exports = function(app) {
 
                 db.Article.create(result)
                 .then(function(data) {
-            
-                res.send("success");
-                    
+                    if(i == number){
+                        res.redirect("/article")
+                    }
                 })
                 .catch(function(error) {
                    console.log(error)
+                    if(i == number){
+                        res.redirect("/article")
+                    }
                 })
                 
             })
@@ -45,6 +48,15 @@ module.exports = function(app) {
 
     app.get("/article", function(req, res) {
         db.Article.find({}).sort({_id: -1}).then(function (data){
+            res.json(data);
+        }).catch(function(error) {
+            res.render("404");
+        });
+        
+    });
+
+    app.get("/saved", function(req, res) {
+        db.Article.find({saved: true}).sort({_id: -1}).then(function (data){
             res.json(data);
         }).catch(function(error) {
             res.render("404");
@@ -74,4 +86,21 @@ module.exports = function(app) {
         });
     });
 
+    app.post("/saveArticle/:id", function(req, res) {
+        db.Article.update({_id: req.params.id},req.body)
+        .then(function(data) {
+            res.json(data);
+        }).catch(function(error) {
+            res.json(error);
+        });
+    });
+
+    app.post("/removeArticle/:id", function(req, res) {
+        db.Article.update({_id: req.params.id},req.body)
+        .then(function(data) {
+            res.redirect("/saved")
+        }).catch(function(error) {
+            res.json(error);
+        });
+    });
 };

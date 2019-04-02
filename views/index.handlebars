@@ -3,6 +3,7 @@
   <div class="topBanner">
     <span class="pageHeader">Get the latest Tech News</span>
     <button id="scrape" class="btn btn-primary">Get Newest</button>
+    <button id="savedArticles" class="btn">Saved Articles</button>
   </div>
   <div class="clear"></div>
   <div class="container">
@@ -21,39 +22,12 @@
           <p>{{this.summary}}</p>
           <p>By {{this.author}}</p>
           <a href="{{this.url}}" class="btn btn-primary">Full Article</a>
-          <button type="button" class="btn btn-danger" data-target="modal1" data-id="{{this._id}}"
-            data-sum="{{this.userName}}" id="seeNote">See Note</button>
-          <button type="button" class="btn btn-danger" data-id="{{this._id}}" data-sum="{{this.userName}}"
-            id="writeNote">Write Note</button>
+          <button class="btn btn-danger" data-id="{{this._id}}" id="saveArticle">Save Article</button>
         </div>
       </li>
       <hr>
       {{/each}}
     </ul>
-
-    {{!-- <div class="modal fade" id="notesModal" tabindex="-1" role="dialog" aria-labelledby="notesTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header text-center">
-            <h5 class="modal-title" id="modalUserName"></h5>
-          </div>
-          <div class="modal-body text-center">
-            <form>
-              <lable for="noteTitle">Note Title</lable><br>
-              <input type="textarea" name="noteTitle"><br>
-              <lable for="noteBody">Note</lable><br>
-              <textarea type="textarea" name="noteBody" rows="3"></textarea><br>
-              <input type='hidden' name='id' id="articleId"></input>
-              <button type="button" class="btn" id="addNote">Add Note</button>
-              <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
-            </form>
-          </div>
-          <div class="modal-footer">
-
-          </div>
-        </div>
-      </div>
-    </div> --}}
 
     <div id="notesModal" class="modal">
       <div class="modal-content">
@@ -73,9 +47,23 @@
         <div id="modalNotes-content">
 
         </div>
+        <a href='#!' class='modal-close waves-effect waves-green btn-flat'>Close</a>
       </div>
     </div>
 
+    <div id="saved" class="modal">
+      <div class="modal-content">
+        <h4>Your Article has been Saved!</h4>
+        <a href='#!' class='modal-close waves-effect waves-green btn-flat'>Close</a>
+      </div>
+    </div>
+
+    <div id="deleted" class="modal">
+      <div class="modal-content">
+        <h4>It has been Deleted!</h4>
+        <a href='#!' class='modal-close waves-effect waves-green btn-flat'>Close</a>
+      </div>
+    </div>
 
   </div>
 </div>
