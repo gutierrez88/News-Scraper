@@ -2,7 +2,7 @@
 
   <div class="topBanner">
     <span class="pageHeader">Get the latest Tech News</span>
-    <button id="scrape" class="btn btn-primary">Get Newest</button>
+    <button class="scrape btn btn-primary">Get Newest</button>
     <button id="savedArticles" class="btn">Saved Articles</button>
   </div>
   <div class="clear"></div>
@@ -37,7 +37,7 @@
         <h6>Note</h6>
         <textarea type="textarea" id="noteBody" rows="3"></textarea>
         <button class="btn" id="addNote">Add Note</button>
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+        <button id="close" class="modal-close waves-effect waves-green btn-flat">Close</button>
       </div>
     </div>
 
@@ -45,29 +45,24 @@
       <div class="modal-content">
         <h4>Notes</h4>
         <div id="modalNotes-content">
-
         </div>
-        <a href='#!' class='modal-close waves-effect waves-green btn-flat'>Close</a>
+        <button id="close" class='modal-close waves-effect waves-green btn-flat'>Close</button>
       </div>
     </div>
 
     <div id="saved" class="modal">
       <div class="modal-content">
         <h4>Your Article has been Saved!</h4>
-        <a href='#!' class='modal-close waves-effect waves-green btn-flat'>Close</a>
+        <button id="close" class='modal-close waves-effect waves-green btn-flat'>Close</button>
       </div>
     </div>
 
     <div id="deleted" class="modal">
       <div class="modal-content">
         <h4>It has been Deleted!</h4>
-        <a href='#!' class='modal-close waves-effect waves-green btn-flat'>Close</a>
+        <button id="close" class='modal-close waves-effect waves-green btn-flat'>Close</button>
       </div>
     </div>
 
   </div>
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script src="js/index.js"></script>

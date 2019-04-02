@@ -20,10 +20,10 @@ var ArticleSchema = new Schema({
         trim: true,
         required: true
     },
-    notes: {
+    notes: [{
         type: Schema.Types.ObjectId,
         ref: "Note"
-    },
+    }],
     dateAdded: {
         type: Date,
         default: Date.now()
