@@ -30,7 +30,7 @@ body {
     font-size: 30px;
 }
 
-#submit {
+#scrape {
     float: right;
 }
 
@@ -40,6 +40,10 @@ body {
 
 .btn {
     margin-right: 5px;
+}
+
+#singleNote {
+    border: 1px solid black;
 }
 
 .clear {

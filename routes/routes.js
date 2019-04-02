@@ -10,7 +10,6 @@ module.exports = function(app) {
             });
         }).catch(function(error) {
             res.render("404");
-            res.json(error);
         });
         
     });
@@ -28,13 +27,16 @@ module.exports = function(app) {
                 result.photo = $(this).find(".lazy").attr("data-original");
                 result.author = $(this).find(".assetAuthor").children("a").text();
                 
+                var number = $(".riverPost").length - 1;
 
                 db.Article.create(result)
                 .then(function(data) {
-                    res.redirect("/article");
+            
+                res.send("success");
+                    
                 })
                 .catch(function(error) {
-                    console.log(error);
+                   console.log(error)
                 })
                 
             })
@@ -46,14 +48,13 @@ module.exports = function(app) {
             res.json(data);
         }).catch(function(error) {
             res.render("404");
-            res.json(error);
         });
         
     });
 
-    app.get("/articles/:id", function(req, res) {
+    app.get("/note/:id", function(req, res) {
         db.Article.find({_id: req.params.id})
-        .populate("note")
+        .populate("notes")
         .then(function(data) {
             res.json(data);
         }).catch(function(error) {
@@ -64,7 +65,7 @@ module.exports = function(app) {
     app.post("/note/:id", function(req, res) {
         db.Note.create(req.body)
         .then(function(newNote){
-            return db.Article.findOneAndUpdate({_id: req.params.id},{ $push: {note: newNote._id}}, {new: true});
+            return db.Article.findOneAndUpdate({_id: req.params.id},{ $push: {notes: newNote._id}});
         })
         .then(function(data) {
             res.json(data);
