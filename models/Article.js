@@ -28,8 +28,12 @@ var ArticleSchema = new Schema({
         type: Date,
         default: Date.now()
     },
+    saved: {
+        type: String,
+        default: "false"
+    },
     photo: String,
-    author: String
+    author: String,
 });
 
 var Article = mongoose.model("Article", ArticleSchema);
