@@ -13,9 +13,15 @@ $(document).on("click", ".scrape", function(e) {
         console.log(data);
         $("#article-list").empty();
         for (var i = 0; i < data.length; i++) {
-            var newOne = "<li class='list-group-item row'><div class='center-align col s3 picture'><img src='" + data[i].photo + "'></div><div class='col s8'><h5>" + data[i].userName + "</h5><p>" + data[i].summary + "</p><p>By " + data[i].author + "</p><a href=''" + data[i].url + "' class='btn btn-primary'>Full Article</a><button type='button' class='btn btn-danger' data-id='" + data[i]._id + "'  id='saveArticle'>Save Article</button></div></li><hr>"
+            if (data[i].saved == "true"){
+                var newOne = "<li class='list-group-item row'><div class='center-align col s3 picture'><img src='" + data[i].photo + "'></div><div class='col s8'><h5>" + data[i].userName + "</h5><p>" + data[i].summary + "</p><p>By " + data[i].author + "</p><a href=''" + data[i].url + "' class='btn btn-primary'>Full Article</a><p  class='btn'>Article Saved</p></div></li><hr>"
 
-            $("#article-list").prepend(newOne);
+                $("#article-list").prepend(newOne);
+            }else{
+                var newOne = "<li class='list-group-item row'><div class='center-align col s3 picture'><img src='" + data[i].photo + "'></div><div class='col s8'><h5>" + data[i].userName + "</h5><p>" + data[i].summary + "</p><p>By " + data[i].author + "</p><a href=''" + data[i].url + "' class='btn btn-primary'>Full Article</a><button type='button' class='btn btn-danger' data-id='" + data[i]._id + "'  id='saveArticle'>Save Article</button></div></li><hr>"
+
+                $("#article-list").prepend(newOne);
+            }
         };
     })
 })
