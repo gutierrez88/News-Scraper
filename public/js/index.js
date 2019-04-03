@@ -13,7 +13,7 @@ $(document).on("click", ".scrape", function(e) {
         console.log(data);
         $("#article-list").empty();
         for (var i = 0; i < data.length; i++) {
-            var newOne = "<li class='list-group-item row'><div class='center-align col s3 picture'><img src='" + data[i].photo + "'></div><div class='col s8'><h5>" + data[i].userName + "</h5><p>" + data[i].summary + "</p><p>By " + data[i].author + "</p><a href=''" + data[i].url + "' class='btn btn-primary'>Full Article</a><button type='button' class='btn btn-danger' data-id='" + data[i]._id + "'  id='saveArticle'>Sace Article</button></div></li><hr>"
+            var newOne = "<li class='list-group-item row'><div class='center-align col s3 picture'><img src='" + data[i].photo + "'></div><div class='col s8'><h5>" + data[i].userName + "</h5><p>" + data[i].summary + "</p><p>By " + data[i].author + "</p><a href=''" + data[i].url + "' class='btn btn-primary'>Full Article</a><button type='button' class='btn btn-danger' data-id='" + data[i]._id + "'  id='saveArticle'>Save Article</button></div></li><hr>"
 
             $("#article-list").prepend(newOne);
         };
@@ -101,9 +101,13 @@ $(document).on("click", "#deleteArticle", function(e) {
         console.log(data);
         $("#article-list").empty();
         for (var i = 0; i < data.length; i++) {
-            var newOne = "<li class='list-group-item row'><div class='center-align col s3 picture'><img src='" + data[i].photo + "'></div><div class='col s8'><h5>" + data[i].userName + "</h5><p>" + data[i].summary + "</p><p>By " + data[i].author + "</p><a href=''" + data[i].url + "' class='btn btn-primary'>Full Article</a><button type='button' class='btn btn-danger' data-id='" + data[i]._id + "' data-sum='" + data[i].userName + " data-toggle='modal' id='seeNote'>See Note</button><button type='button' class='btn btn-danger' data-id='" + data[i]._id + "' data-sum='" + data[i].userName + "' id='writeNote'>Write Note</button><button class='btn btn-danger' data-id='" + data[i]._id + "'  id='deleteArticle'>Remove Article</button></div></li><hr>"
+            if (data[0].notes[i].saved == "false"){
+                console.log("note deleted")
+            }else{
+                var newOne = "<li class='list-group-item row'><div class='center-align col s3 picture'><img src='" + data[i].photo + "'></div><div class='col s8'><h5>" + data[i].userName + "</h5><p>" + data[i].summary + "</p><p>By " + data[i].author + "</p><a href=''" + data[i].url + "' class='btn btn-primary'>Full Article</a><button type='button' class='btn btn-danger' data-id='" + data[i]._id + "' data-sum='" + data[i].userName + " data-toggle='modal' id='seeNote'>See Note</button><button type='button' class='btn btn-danger' data-id='" + data[i]._id + "' data-sum='" + data[i].userName + "' id='writeNote'>Write Note</button><button class='btn btn-danger' data-id='" + data[i]._id + "'  id='deleteArticle'>Remove Article</button></div></li><hr>"
 
-            $("#article-list").prepend(newOne);
+                $("#article-list").prepend(newOne);
+            };
         };
     });
 });
@@ -119,12 +123,41 @@ $(document).on("click", "#seeNote", function(e) {
         console.log(data);
         $("#modalNotes-content").empty();
         for (i = 0; i < data[0].notes.length; i++){
-            var notes = "<div id='singleNote' class='text-center'><h6>" + data[0].notes[i].title + "</h6><h6>" + data[0].notes[i].body + "</h6><button class='btn' id='deleteNote' data-id='" + data[0]._id + "'>Delete</button></div>"
+            if ( data[0].notes[i].saved == "false"){
+                console.log("deleted")
+            }else{
+                var notes = "<div id='singleNote' class='text-center'><h6>" + data[0].notes[i].title + "</h6><h6>" + data[0].notes[i].body + "</h6><button class='btn' id='deleteNote' data-noteId='"+ data[0].notes[i]._id +"' data-id='" + data[0]._id + "'>Delete</button></div>"
 
-            $("#modalNotes-content").append(notes);
+                $("#modalNotes-content").append(notes);
+            }
         }
 
 
         $("#seeModal").modal('open')
+    });
+});
+
+$(document).on("click", "#deleteNote", function(e) {
+    e.preventDefault();
+    var thisId = $(this).attr("data-noteId");
+    $("#seeModal").modal('close')
+    console.log("16")
+    $.ajax({
+        method: "POST",
+        url: "/deleteNote/" + thisId,
+        data: {
+            saved: "false"
+        }
+    }).then(function (data) {
+        console.log(data);
+        $("#seeModal").empty();
+
+    //     for (i = 0; i < data[0].notes.length; i++){
+    //         var notes = "<div id='singleNote' class='text-center'><h6>" + data[0].notes[i].title + "</h6><h6>" + data[0].notes[i].body + "</h6><button class='btn' id='deleteNote' data-noteId='"+ data[0].notes[i]._id +"' data-id='" + data[0]._id + "'>Delete</button></div>"
+
+    //         $("#modalNotes-content").append(notes);
+    //     }
+    // });
+    $("#deleted").modal('open')
     });
 });
