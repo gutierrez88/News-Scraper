@@ -101,7 +101,7 @@ $(document).on("click", "#deleteArticle", function(e) {
         console.log(data);
         $("#article-list").empty();
         for (var i = 0; i < data.length; i++) {
-            if (data[0].notes[i].saved == "false"){
+            if (data.saved == "false"){
                 console.log("note deleted")
             }else{
                 var newOne = "<li class='list-group-item row'><div class='center-align col s3 picture'><img src='" + data[i].photo + "'></div><div class='col s8'><h5>" + data[i].userName + "</h5><p>" + data[i].summary + "</p><p>By " + data[i].author + "</p><a href=''" + data[i].url + "' class='btn btn-primary'>Full Article</a><button type='button' class='btn btn-danger' data-id='" + data[i]._id + "' data-sum='" + data[i].userName + " data-toggle='modal' id='seeNote'>See Note</button><button type='button' class='btn btn-danger' data-id='" + data[i]._id + "' data-sum='" + data[i].userName + "' id='writeNote'>Write Note</button><button class='btn btn-danger' data-id='" + data[i]._id + "'  id='deleteArticle'>Remove Article</button></div></li><hr>"
