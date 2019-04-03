@@ -126,7 +126,7 @@ $(document).on("click", "#seeNote", function(e) {
             if ( data[0].notes[i].saved == "false"){
                 console.log("deleted")
             }else{
-                var notes = "<div id='singleNote' class='text-center'><h6>" + data[0].notes[i].title + "</h6><h6>" + data[0].notes[i].body + "</h6><button class='btn' id='deleteNote' data-noteId='"+ data[0].notes[i]._id +"' data-id='" + data[0]._id + "'>Delete</button></div>"
+                var notes = "<div class='row'><div class='col s8><div id='singleNote' class='text-center'><h6>" + data[0].notes[i].title + "</h6><h6>" + data[0].notes[i].body + "</h6></div><button class='btn col s3' id='deleteNote' data-noteId='"+ data[0].notes[i]._id +"' data-id='" + data[0]._id + "'>Delete</button></div></div><hr>"
 
                 $("#modalNotes-content").append(notes);
             }
@@ -150,7 +150,6 @@ $(document).on("click", "#deleteNote", function(e) {
         }
     }).then(function (data) {
         console.log(data);
-        $("#seeModal").empty();
         $("#deleted").modal('open')
     });
 });

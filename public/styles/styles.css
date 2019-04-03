@@ -46,8 +46,9 @@ body {
     margin-right: 5px;
 }
 
-#singleNote {
-    border: 1px solid black;
+#deleteNote {
+    float: right;
+   margin-top: 20px;
 }
 
 .clear {
