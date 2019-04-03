@@ -151,13 +151,6 @@ $(document).on("click", "#deleteNote", function(e) {
     }).then(function (data) {
         console.log(data);
         $("#seeModal").empty();
-
-    //     for (i = 0; i < data[0].notes.length; i++){
-    //         var notes = "<div id='singleNote' class='text-center'><h6>" + data[0].notes[i].title + "</h6><h6>" + data[0].notes[i].body + "</h6><button class='btn' id='deleteNote' data-noteId='"+ data[0].notes[i]._id +"' data-id='" + data[0]._id + "'>Delete</button></div>"
-
-    //         $("#modalNotes-content").append(notes);
-    //     }
-    // });
-    $("#deleted").modal('open')
+        $("#deleted").modal('open')
     });
 });
