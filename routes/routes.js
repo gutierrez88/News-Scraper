@@ -65,7 +65,7 @@ module.exports = function(app) {
     });
 
     app.get("/note/:id", function(req, res) {
-        db.Article.find({_id: req.params.id})
+        db.Article.find( {_id: req.params.id} )
         .populate("notes")
         .then(function(data) {
             res.json(data);
@@ -102,5 +102,14 @@ module.exports = function(app) {
         }).catch(function(error) {
             res.json(error);
         });
+    });
+
+    app.post("/deleteNote/:id", function(req, res) {
+        db.Note.update({_id: req.params.id},req.body)
+        .then(function(data) {
+            res.json(data);
+        }).catch(function(error) {
+            console.log(error);
+        })
     });
 };
