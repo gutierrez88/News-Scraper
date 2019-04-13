@@ -11,9 +11,10 @@ body {
     background-attachment: fixed;
     
 }
+
 .selector-for-some-widget {
     box-sizing: content-box;
-  }
+}
 
 .row {
     margin-top: 20px;
